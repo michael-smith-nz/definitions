@@ -29,6 +29,7 @@ months:
   - name: Southland Anniversary Day
     regions: [nz_sl]
     mday: 17
+    observed: southland_anniversary_day(year)
   - name: Wellington Anniversary Day
     regions: [nz_we]
     mday: 22
@@ -264,6 +265,17 @@ tests:
       regions: ["nz"]
     expect:
       name: "Matariki"
+  - given:
+      date: "2024-01-17"
+      regions: ["nz_sl"]
+    expect:
+      name: "Southland Anniversary Day"
+  - given:
+      date: "2024-04-02"
+      regions: ["nz_sl"]
+      options: ["observed"]
+    expect:
+      name: "Southland Anniversary Day"
 
 
 methods:
@@ -286,6 +298,10 @@ methods:
     arguments: date
     ruby: |
       date + 7
+  southland_anniversary_day:
+    arguments: year
+    ruby: |
+      easter(year) + 2
   matariki:
     # Matariki is based on the Māori lunar calendar (similar to Easter) so can't be
     # easily calculated, so must be manually entered. Matariki falls on a Friday to
